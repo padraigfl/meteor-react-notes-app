@@ -1,21 +1,27 @@
 import React, { Component, PropTypes } from 'react';
-
-import { Notes } from '../api/notes.js';
+import { Meteor } from 'meteor/meteor';
+import classnames from 'classnames';
  
 // Task component - represents a single todo item
 export default class Note extends Component {
   toggleChecked(){
-    Notes.update(this.props.note._id, {
-      $set: { checked: !this.props.note.checked },
-    });
+    Meteor.call('notes.setChecked', this.props.note._id, !this.props.note.checked);
   }
 
   deleteNote(){
-    Notes.remove(this.props.note._id);
+    Meteor.call('notes.remove', this.props.note._id);
+  }
+
+  togglePrivate() {
+    Meteor.call('notes.setPrivate', this.props.note._id, ! this.props.note.private);
   }
 
   render() {
-    const noteClassName = this.props.note.checked ? 'checked': '';
+    const noteClassName = classnames({
+      checked: this.props.note.checked,
+      private: this.props.note.private,
+    });
+
     return (
       <li className={noteClassName}>
         <button className="delete" onClick={this.deleteNote.bind(this)}>
@@ -27,7 +33,14 @@ export default class Note extends Component {
           checked={this.props.note.checked}
           onClick={this.toggleChecked.bind(this)}
         />
-        <span className="text">{this.props.note.text}</span>
+        { this.props.showPrivateButton ? (
+          <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
+            { this.props.note.private ? 'Private' : 'Public' }
+          </button>
+        ) : ''}
+        <span className="text">
+          <strong>{this.props.note.username}</strong>: {this.props.note.text}
+        </span>
       </li>
     );
   }
@@ -37,4 +50,5 @@ Note.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
   note: PropTypes.object.isRequired,
+  showPrivateButton: React.PropTypes.bool.isRequired,
 };
