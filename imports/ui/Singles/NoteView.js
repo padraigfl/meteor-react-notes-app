@@ -27,16 +27,30 @@ class NoteView extends Component {
     }
 
     return (
-      <div className='note-view'>
-        <div className='note-actions'>
-          <Link to={`/edit/${this.props.note._id}`}>Edit</Link>
-          <button onClick={this.deleteNote.bind(this)}>Delete</button>
-        </div>
-        <div className='note-title'>
-          {this.props.note.title}
-        </div>
-        <div className='note-content'>
-          {this.props.note.content}
+      <div className='display'>
+        <div className='note-view'>
+          <div className='note-heading display-heading'>
+            <div className='note-info'>
+              <span className='note-date'>
+                Created on {this.props.note.createdAt.toLocaleString()}<br/>
+                Last Edited: {this.props.note.lastUpdated.toLocaleString()}
+              </span>
+            </div>
+            <div className='note-actions '>
+
+              <Link className='mobile-only' to={`/`}>Back</Link>
+              <Link to={`/edit/${this.props.note._id}`}>Edit</Link>
+              <button onClick={this.deleteNote.bind(this)}>Delete</button>
+            </div>
+          </div>
+          <div className='note-body'>
+            <div className='note-title'>
+              <div className='vertical-align'>{this.props.note.title}</div>
+            </div>
+            <div className='note-content'>
+              {this.props.note.content}
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -8,8 +8,6 @@ import { Notes } from '../api/notes.js';
 
 import CellList from './Components/CellList.js';
 
-import '../../client/stul.less';
-
 // App component - represents the whole app
 class NoteList extends Component {
   constructor(props) {

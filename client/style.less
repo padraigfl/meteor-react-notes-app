@@ -1,0 +1,203 @@
+@bg1: #ccc;
+@bg2: #999;
+
+@r1: #ff5555;
+@g1: #55ff55;
+@b1: #5555ff;
+
+@black: #154255;
+
+@font-size-desktop: 16px;
+@default-margin: 16px;
+
+@nav-width: 400px;
+@nav-min-width: 500px;
+@nav-main-height: 80px;
+
+@button-width: 120px;
+
+html{
+  font-size: @font-size-desktop;
+  font-family: sans-serif;
+}
+
+body{
+  padding: 0px;
+  margin: 0px;
+  top:0px;
+}
+
+.main{
+  height: 100vh;
+  float: left;
+  width: @nav-width;
+  max-height: 100vh;
+  color: @black;
+  font-size: 1.5rem;
+  .nav{
+    height: @nav-main-height;
+    background-color: @r1;
+    position: relative;
+    .account{
+      float: right;
+    }
+    .links{
+      text-align: center;
+      width: 100%;
+      bottom: 0px;
+      position: absolute;
+      a{
+        display: inline-block;
+        width: 100%/3;
+        background-color: grey;
+      }
+    }
+  }
+  .list{
+    height: calc(~'100vh - @{nav-main-height}');
+    width: 100%;
+    overflow-y: auto;
+    ul{
+      padding: 0px;
+      margin: 0px;
+    }
+    li {
+      position: relative;
+      list-style: none;
+      border-bottom: #eee solid 1px;
+      a{
+        display: block;
+        color: @black;
+        width: 100%;
+        height: 48px;
+        text-decoration: none;
+
+        &:hover{
+          background-color: @r1;
+        }
+        &:focus{
+          background-color: @b1;
+        }
+      }
+      .note-title{
+        font-weight: bold;
+      }
+      .note-summary{
+        padding: 8px;
+        width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        float: left;
+        .note-content{
+          font-size: 1.15rem;
+        }
+      }
+      .note-date{
+        width: 25%;
+        float: left;
+        font-style: italic;
+        text-align: right;
+        font-size: 0.9rem;
+      }
+    }
+
+  }
+}
+.display{
+  background-color: #aaa;
+  float: left;
+  width: calc(~'100vw - @{nav-width}');
+  height: 100vh;
+
+  .display-heading{
+    width: 100%;
+    background-color: @b1;
+    height: @nav-main-height;
+  }
+
+  .note-view{
+    .note-heading{
+      position: relative;
+      .note-info{
+        padding: 8px 12px;
+      }
+      .note-actions{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        a, button{
+          bottom: 0px;
+          display: inline-block;
+          width: @button-width;
+          border: 1px solid @r1;
+          background-color: white;
+          font-size: 1.5rem;
+          padding: 0px;
+          text-decoration: none;
+          text-align: center;
+          color: @black;
+          float: right;
+          box-sizing: border-box;
+        }
+      }
+    }
+    .note-body{
+      .note-title{
+        height: @nav-main-height;
+        background-color: @g1;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 0px 16px;
+        input[type=text]{
+          width: 100%;
+          font-size: 2rem;
+          position: relative;
+        }
+      }
+      .note-content{
+        margin: 16px;
+        background-color: #dcdcdc;
+        height: calc(~"100vh - (@{nav-main-height}*2) - (@{default-margin} * 2)");
+        overflow-y: flow;
+        textarea{
+          height: 100%;
+          width: 100%;
+          font-size: 1.5rem;
+          border-color: @b1;
+
+        }
+      }
+    }
+  }
+}
+
+/* requires fixed height block element as parent */
+.vertical-align{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.not-implemented{
+  font-family: serif !important;
+}
+
+@media(max-width: 767px){
+  .display{
+    position: absolute;
+    width: 100%;
+  }
+  .main{
+    width: 100%;
+  }
+  .desktop-only{
+    display: none !important;
+  }
+}
+
+@media(min-width: 768px){
+  .mobile-only{
+    display: none !important;
+  }
+}

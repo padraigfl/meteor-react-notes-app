@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Notes } from '../../api/notes.js';
@@ -57,34 +57,52 @@ class NoteView extends Component {
   render() {
     // Just render a placeholder container that will be filled in
     return (
-      <div className='note-overlay'>
-        <div className='note-form'>
-          <form className='new-task' onSubmit={this.handleSubmit.bind(this)}>
-            <input
-              className='new-title'
-              type='text'
-              ref='title'
-              placeholder='Give your note a title (optional)'
-              value={this.state.note.title}
-              onChange={this.handleChange.bind(this)}
-            />
-            <textarea
-              className='new-note'
-              ref='content'
-              placeholder='Enter your note here'
-              value={this.state.note.content}
-              onChange={this.handleChange.bind(this)}
-            />
-            <button className='new-submit' type='submit'>
-              Submit
-            </button>
-            <button className='new-save' type='submit'>
-              Save
-            </button>
-          </form>
-          {this.state.fireRedirect &&
-            <Redirect to={`/note/${this.state.noteId}`} />}
-        </div>
+      <div className='display'>
+        <form className='edit-note' onSubmit={this.handleSubmit.bind(this)}>
+          <div className='note-view'>
+            <div className='note-heading display-heading'>
+              <div className='note-info'>
+              </div>
+              <div className='note-actions '>
+                <button className='edit-submit' type='submit'>
+                  Submit
+                </button>
+                <button className='edit-save not-implemented' type='submit'>
+                  Save
+                </button>
+                <Link className='' to={`/note/${this.props.noteId}`}>
+                  Cancel
+                </Link>
+                <Link className='mobile-only' to={`/`}>Back</Link>
+              </div>
+            </div>
+            <div className='note-body'>
+              <div className='note-title'>
+                <div className='vertical-align'>          
+                  <input
+                    className='new-title'
+                    type='text'
+                    ref='title'
+                    placeholder='Give your note a title (optional)'
+                    value={this.state.note.title}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+              <div className='note-content'>
+                <textarea
+                  className='new-note'
+                  ref='content'
+                  placeholder='Enter your note here'
+                  value={this.state.note.content}
+                  onChange={this.handleChange.bind(this)}
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+        {this.state.fireRedirect &&
+          <Redirect to={`/note/${this.state.noteId}`} />}
       </div>
     );
   }

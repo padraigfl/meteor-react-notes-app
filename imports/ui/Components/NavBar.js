@@ -23,7 +23,7 @@ class NavBar extends Component {
           <Link to="/" className="head-button notes">
             Notes
           </Link>
-          <Link to="/drafts" className="head-button drafts">
+          <Link to="/drafts" className="head-button drafts not-implemented">
             Drafts
           </Link>
           <Link to="/new" className="head-button new">
