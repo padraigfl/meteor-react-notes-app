@@ -1,9 +1,11 @@
 @bg1: #ccc;
 @bg2: #999;
 
-@r1: #ff5555;
-@g1: #55ff55;
-@b1: #5555ff;
+@r1: #FF7369;
+@p1: #CB60E8;
+@b1: #7682FF;
+@t1: #60E0E8;
+@g1: #9BFFAA;
 
 @black: #154255;
 
@@ -73,7 +75,7 @@ body{
         text-decoration: none;
 
         &:hover{
-          background-color: @r1;
+          background-color: @g1;
         }
         &:focus{
           background-color: @b1;
@@ -105,7 +107,7 @@ body{
   }
 }
 .display{
-  background-color: #aaa;
+  background-color: #ccc;
   float: left;
   width: calc(~'100vw - @{nav-width}');
   height: 100vh;
@@ -145,7 +147,7 @@ body{
     .note-body{
       .note-title{
         height: @nav-main-height;
-        background-color: @g1;
+        background-color: @t1;
         font-size: 2rem;
         font-weight: bold;
         padding: 0px 16px;
